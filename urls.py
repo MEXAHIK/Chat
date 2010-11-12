@@ -13,4 +13,7 @@ urlpatterns = patterns('Chat.views',
     (r'^login/$', 'login_user'),
     (r'^admin/', include(admin.site.urls)),
     (r'^register/$', 'view_regiser'),
+    (r'^create-room/$', 'create_room'),
+    (r'^autch/' , 'autch'),
+    url(r'^chat-room/(?P<id>\d+)/$', 'chat_room_details', name = 'chat_room_details')
 )

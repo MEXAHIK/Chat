@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление комнаты{% endblock %}
+{% block header %}Добавление комнаты{% endblock %}
+
+{% block content %}
+
+<form action = "" method = "POST">
+{% csrf_token %}
+Название комнаты {{ create_form.name }}<br />
+<input type = "submit" value = "Создать">
+{{ create_form.errors }}
+{% endblock %}

@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %} Главня страница {% endblock %}
-{% block header %}Чат{% endblock %}
+{% block header %}<p align = "center">Чат</p>{% endblock %}
 {% block href %}{% endblock %}
-{% block content %}<object width="411" height="28"><param name="movie" value="http://embed.prostopleer.com/track?id=4510415P278"></param><embed src="http://embed.prostopleer.com/track?id=4510415P278" type="application/x-shockwave-flash" width="411" height="28"></embed></object>{% endblock %}
+{% block content %} 
+    <form action = "/create-room/" method = "GET">
+    <input type = "submit" value = "Создать свою комнату">
+    <p>Список chat-room</p>
+	<table border = "1">
+		<tr><th>Название комнаты</th><th>Автор</th></tr>
+		{% for room in rooms %}
+			<tr><td><a href = "{% url Chat.views.chat_room_details room.id %}">{{ room.name }}</td><td>{{ room.author_name }}</td></tr>
+		{% endfor %}
+		<tr></tr>
+	</table>
+{% endblock %}
