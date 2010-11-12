@@ -1,16 +1,16 @@
 from django.conf.urls.defaults import *
+from django.contrib import admin
+admin.autodiscover()
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Example:
-    # (r'^Chat/', include('Chat.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+urlpatterns = patterns('Chat.views',
+    (r'^$', 'main_page', {'email': 'email'}),
+    (r'^main/$', 'main_page', {'email': 'email'}),
+    (r'^logout_user/$', 'logout_user'),
+    (r'^login/$', 'login_user'),
+    (r'^admin/', include(admin.site.urls)),
+    (r'^register/$', 'view_regiser'),
 )

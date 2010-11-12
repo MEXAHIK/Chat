@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/ruslan/work/Chat/Chatdb/chat.db',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/ruslan/work/Chat/chat.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -31,7 +31,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 SITE_ID = 1
 
@@ -78,7 +78,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'Chat.urls'
 
 TEMPLATE_DIRS = (
-    'Chat/templates'
+    '/home/ruslan/work/Chat/templates'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -88,7 +88,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+#    'django.contrib.sites',
     'django.contrib.messages',
     'Chat.Chatdb',
     # Uncomment the next line to enable the admin:

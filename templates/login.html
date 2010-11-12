@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="ru-en">
+<head>
+    <title>Чат: Вход в систему</title>
+</head>
+<body>
+<table width = 100%>
+<tr><th></th><th>ЧАТ<br /><br /><br />Для использования чата войдите в систему</th><th></th></tr>
+<tr><td></td><td align = "center" >
+<table>
+    <tr></tr>
+	    <form action = "/login/" method = "POST">
+	    {% csrf_token %}
+        <tr><td>E-mail</td><td>{{ login_form.email }}</td></tr>
+        <tr><td>Пароль</td><td>{{ login_form.password }}</td>
+        <tr><td align = "right" bgcolor = "#ACCCCC"><a href = "/register/">Регистрация</a></td><td><input type = "submit" value = "Войти"></td></tr>
+        </form>
+        
+</table>
+<tr><td></td><td align = "center">
+{% if login_form.email.errors %}
+    <p>{{ login_form.email.errors }}</p>
+{% endif %}
+{{ login_form.non_field_errors }}</td><td></td></tr>
+</table>
+</body>
+</html>

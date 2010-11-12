@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="ru-en">
+<head>
+    <title>Чат: {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <hr>
+    <h3>{% block header %}{% endblock %}</h3>
+    <table  width = 100%>
+    <tr>
+    <td>{% block href %}<a href = "{% url Chat.views.main_page %}">Главная</a><br />{% endblock %}</td>
+    
+    <td align = "right" width = 20%>{% block auth %}
+        {% if user.is_authenticated %}
+            Добро пожаловать: <a href = "/admin/password_change/">
+            {% if user.first_name != "" %}
+                {{ user.first_name }}</a>
+            {% else %}
+                {{ user.username }}</a>
+            {% endif %}
+            <p><a href = "{% url Chat.views.logout_user %}" style = "color: red">Выйти</a></p>
+        {% endif %}
+    {% endblock %}</td>
+    </tr>
+    </table>
+    {% block register %}{% endblock %}
+    {% block content %}{% endblock %}<br />
+    {% block content2 %}{% endblock %}
+</body>
+</html>

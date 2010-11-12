@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Страница регистрации{% endblock %}
+{% block header %}Регистрация{% endblock %}
+
+{% block auth %}{% endblock %}
+
+{% block register %}
+<table>
+<tr></tr>
+<form action = "" method = "POST">
+{% csrf_token %}
+<tr><td>E-mail</td><td>{{ register_form.email }}</td><td>{{ form_errors.email.errors }}</td></tr>
+<tr><td>Пароль</td><td>{{ register_form.password1 }}</td><td>{{ form_errors.password1.errors }}</td></tr>
+<tr><td>Повторите пароль</td><td>{{ register_form.password2 }}</td><td>{{ form_errors.password2.errors }}</td></tr>
+<tr><td><input type = "submit" value = "Регистрация"></td></tr>
+</table>
+{% endblock %}
