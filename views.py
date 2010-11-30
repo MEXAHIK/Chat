@@ -2,12 +2,12 @@
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from Chat.forms import LoginForm, RegisterForm
 from django.contrib.auth.models import User
 from Chatdb.models import ChatRoomForm, ChatRoom
 from django.contrib.auth.decorators import permission_required
-#from django.contrib
+import datetime
 
 
 def main_page(request, email):
@@ -64,9 +64,13 @@ def create_room(request):
 	return render_to_response('create_room.html', {'create_form': create_form}, context_instance = RequestContext(request))
 
 def autch(request):
-	form = request.user.user_permissions.add(19)
-	return render_to_response('autch.html', {'form': form})
+	return render_to_response('autch.html')
 
 @permission_required('Chatdb.add_chatroom', '/autch/')
 def chat_room_details(request, id):
 	return render_to_response('chat_room_details.html', context_instance = RequestContext(request))
+
+def send_message(reques):
+	name = "ajax here"
+	print name
+	return HttpResponse(name)

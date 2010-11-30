@@ -10,7 +10,7 @@
     <tr>
     <td>{% block href %}<a href = "{% url Chat.views.main_page %}">Главная</a><br />{% endblock %}</td>
     
-    <td id="user_name" align = "right" width = 20%>{% block auth %}
+    <td align = "right" width = 20%>{% block auth %}
         {% if user.is_authenticated %}
             Добро пожаловать: <a href = "/admin/password_change/">
             {% if user.first_name != "" %}

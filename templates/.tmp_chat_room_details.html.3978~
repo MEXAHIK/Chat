@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Комната чата{% endblock %}
+{% block header %}Комната{% endblock %}
+
+{% block content %}
+	<p id = "content1">Этот текст будет выбиратся</p>
+	<img id = "1" src="http://allnight.com.ua/uploads/posts/2010-11/1290457531_9-w550.jpg">
+	<img id = "2" src="http://allnight.com.ua/uploads/posts/2010-11/1290457550_33-w550.jpg">
+    <script type = "text/javascript">
+        $(document).ready(function(){
+		
+		function hiden(id, time){
+			if (time < 500 || time > 10000 || isNaN(time)) {
+				return false;
+            } 
+			else {
+				var full_id = '#' + id;
+				$(full_id).fadeOut(time);
+			}
+		} // fihish hiden
+		
+		function test_allert(my_id, atribut_name, new_text){
+			var full_id = '#' + my_id;
+			$(full_id).attr(atribut_name, new_text);
+		} // finish test_allert
+		
+		//test_allert('1', 'title', 'Этот текст введен спомощью jquery');
+		hiden(1, 1000);
+		/*
+		var image_1 = $('#1'), image_2 = $('#2');
+		image_1.hide(2);
+		image_1.fadeIn(2000);
+		image_2.fadeIn(3000);
+		//$('#2').hide(1).show(2000);
+		*/
+		}); //finish ready
+		
+    </script>
+{% endblock %}

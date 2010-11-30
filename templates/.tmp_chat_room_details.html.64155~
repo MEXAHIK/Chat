@@ -11,7 +11,6 @@
 		table-layout: fixed;
 	}
 </style>
-	<div id = "test"></div>
 	{{temp}}
 	<table rules="rows" id = "show_text" width = 100% border="1">
 		<tr>

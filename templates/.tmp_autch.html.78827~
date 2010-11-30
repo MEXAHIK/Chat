@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+
+{% block title %}Ошибка авторизации{% endblock %}
+{% block header %}У вас нет прав на это действие{% endblock %}
+{% block href %}{{form}}{% endblock %}

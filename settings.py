@@ -1,4 +1,8 @@
 # Django settings for Chat project.
+import os
+
+def rel(*path):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), *path)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -45,17 +49,17 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = rel('media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/admin_media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '236kk9zu0$!be$td931wo#z&!3hr9fc*_&$2416narnhid1r1i'
