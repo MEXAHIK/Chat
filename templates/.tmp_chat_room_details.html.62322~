@@ -15,10 +15,6 @@
 		border-top: 1px solid #cbbdbd;
 		
 	}
-	
-	#user_name{
-		color: #191dd3;
-	}
 </style>
 	<table id = "show_text" width = 100%>
 		<tr>
@@ -27,7 +23,6 @@
 	</table>
 	<p><input id="send_text" type="text" value="example">
 	<input type="button" value="Отправить" id="send_button"></p>
-	<hr>
-	<div id = "temp_message"></div>
+	
     <script type = "text/javascript" src="{{MEDIA_URL}}js/jscript.js"></script>
 {% endblock %}

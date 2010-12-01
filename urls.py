@@ -18,7 +18,7 @@ urlpatterns = patterns('Chat.views',
     (r'^autch/' , 'autch'),
     url(r'^chat-room/(?P<id>\d+)/$', 'chat_room_details', name = 'chat_room_details'),
     (r'^send-message/$', 'send_message'),
-    #(r'^send-message/$', 'send_message'),
+    (r'^update-message/$', 'update_message'),
 )
 
 if settings.DEBUG:

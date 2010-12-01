@@ -7,7 +7,8 @@ from Chat.forms import LoginForm, RegisterForm
 from django.contrib.auth.models import User
 from Chatdb.models import ChatRoomForm, ChatRoom
 from django.contrib.auth.decorators import permission_required
-import datetime
+from django.utils import simplejson
+import time
 
 
 def main_page(request, email):
@@ -70,7 +71,41 @@ def autch(request):
 def chat_room_details(request, id):
 	return render_to_response('chat_room_details.html', context_instance = RequestContext(request))
 
-def send_message(reques):
-	name = "ajax here"
-	print name
-	return HttpResponse(name)
+all_message = []
+
+def send_message(request):
+	message = request.GET.get('message')
+	user_name = request.GET.get('user_name')
+	temp_time = time.gmtime(time.time())
+	send_time = "%s:%s:%s" % (temp_time.tm_hour + 2, temp_time.tm_min, temp_time.tm_sec)
+	all_message.append("%s,%s,%s" % (user_name, message, send_time))
+	print (all_message)
+	response = {'success': True, 'message': message, 'user_name': user_name, 'send_time': send_time}
+	json=simplejson.dumps(response);
+	return HttpResponse(json, mimetype='application/json')
+
+
+def update_message(request):
+	message_count = request.POST.get('message_count')
+	user_name = request.user
+	len_mass = len(all_message)
+	difference = 0
+	new_mass = []
+	mass = []
+	print (len_mass, message_count)
+	if len_mass != int(message_count):
+		difference =  len_mass - int(message_count)
+		print (difference)
+		for i in all_message:
+			j = i.split(",")
+			print (j[0])
+			if j[0] != user_name:
+				new_mass.insert(0, "%s,%s,%s" % (j[0], j[1], j[2]))
+		k = 0
+		while(difference > k):
+			mass.append(new_mass[k])
+			k = k + 1
+		message_count = len_mass
+	response = {'success': True, 'mass': mass, 'messge_count': message_count}
+	json=simplejson.dumps(response);
+	return HttpResponse(json, mimetype = 'application/json')

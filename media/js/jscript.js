@@ -1,44 +1,37 @@
 $(document).ready(function(){
-	
-// Создание обьекта XMLHttpRequest
-	function CreateRequest(){
-		var Request = false;
-		
-		if (window.XMLHttpRequest){
-			//Gecko-совместимые браузеры, Safari, Konqueror
-			Request = new XMLHttpRequest();
-			}
-		else if (window.ActiveXObject){
-			//Internet explorer
-			try{
-				Request = new ActiveXObject("Microsoft.XMLHTTP");
-				alert('IE, Microsoft.XMLHTTP');
-			}
-			catch (CatchException){
-				Request = new ActiveXObject("Msxml2.XMLHTTP");
-				alert('IE, Msxml2.XMLHTTP');
-			}
-		}
-		
-		if (!Request){
-			alert("Невозможно создать XMLHttpRequest");
-		}
-		return Request;
-	}
-
+	var message_count = 0, show_text = $('#show_text'), temp;
 //  фнкция отправки сообщения
 	function sendMessage(){
-		Request = CreateRequest();
-		var show_text = $('#show_text'), temp;
 		if ($('#send_text').val() != "") {
-			temp = show_text.html() + '<tr><td color="#1119CB">' + $('#user_name > a').text() + ':</td><td> ' + $('#send_text').val() + '</td><td></td></tr>';
-			show_text.html(temp);
-			$.post('/send-message/', {} , function(){
-				alert(Request.responseText);
+			message_count ++;
+			$.get('/send-message/', {'message': $('#send_text').val(), 'user_name': $('#user_name > a').text(), 'message_count' :message_count} , function(data){
+					temp = show_text.html() + '<tr><td id = "user_name">' + data.user_name + ':</td><td> ' + data.message + '</td><td>' + data.send_time +'</td><td></td></tr>';
+					show_text.html(temp);
 			});
 			$('#send_text').val('');
 		};
 	};
+	
+	// Ожидание сообщения
+	function wait_message(){
+		var split_text;
+		$.ajax({
+			type: 'POST',
+			url: '/update-message/',
+			data: {'message_count': message_count, 'user_name': $('#user_name > a').text()},
+			success: function(data){
+				/*
+				$.each(data.new_mass, function(){
+					$('#temp_message').html('' + $(this));
+				})*/
+				message_count = data.messge_count;
+				split_text = data.mass[0].split(',');
+				temp = show_text.html() + '<tr><td id = "user_name">' + split_text[0] + ':</td><td> ' + split_text[1] + '</td><td>' + split_text[2] +'</td><td></td></tr>';
+				show_text.html(temp);
+			}
+		})
+	};
+	var id = setInterval(wait_message, 2000);
 	
 // отправвка по нажатию кнопки
 	$('#send_button').click(function(eObject){

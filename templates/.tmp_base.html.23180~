@@ -12,7 +12,12 @@
     
     <td id="user_name" align = "right" width = 20%>{% block auth %}
         {% if user.is_authenticated %}
-            Добро пожаловать: <a href = "/admin/password_change/">{{ user.username }}</a>
+            Добро пожаловать: <a href = "/admin/password_change/">
+            {% if user.first_name != "" %}
+                {{ user.first_name }}</a>
+            {% else %}
+                {{ user.username }}</a>
+            {% endif %}
             <p><a href = "{% url Chat.views.logout_user %}" style = "color: red">Выйти</a></p>
         {% endif %}
     {% endblock %}</td>
