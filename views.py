@@ -57,7 +57,7 @@ def create_room(request):
 	if request.method == 'POST':
 		form = ChatRoomForm(request.POST)
 		if form.is_valid():
-			save_room = ChatRoom.objects.create(name = request.POST.get('name'), author_name = request.user.username)
+			save_room = ChatRoom.objects.create(name = request.POST.get('name'), author_name = request.user.username, notes = request.POST.get('notes'))
 			return HttpResponseRedirect('/main/')
 		else:
 			create_form = ChatRoomForm(request.POST)

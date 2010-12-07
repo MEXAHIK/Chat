@@ -7,7 +7,10 @@
 
 <form action = "" method = "POST">
 {% csrf_token %}
-Название комнаты {{ create_form.name }}<br />
+<table>
+	<tr><td>Название комнаты</td><td>{{ create_form.name }}</td></tr><br />
+	<tr><td>Описание:</td><td>{{ create_form.notes }}</td></tr><br />
+</table>
 <input type = "submit" value = "Создать">
 {{ create_form.errors }}
 {% endblock %}

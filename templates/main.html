@@ -8,9 +8,9 @@
     <input type = "submit" value = "Создать свою комнату">
     <p>Список chat-room</p>
 	<table border = "1">
-		<tr><th>Название комнаты</th><th>Автор</th></tr>
+		<tr><th>Название комнаты</th><th>Автор</th><th>Описание</th></tr>
 		{% for room in rooms %}
-			<tr><td><a href = "{% url Chat.views.chat_room_details room.id %}">{{ room.name }}</td><td>{{ room.author_name }}</td></tr>
+			<tr><td><a href = "{% url Chat.views.chat_room_details room.id %}">{{ room.name }}</td><td>{{ room.author_name }}</td><td>{{ room.notes }}</td></tr>
 		{% endfor %}
 		<tr></tr>
 	</table>

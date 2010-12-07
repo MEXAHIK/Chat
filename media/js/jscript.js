@@ -17,6 +17,7 @@ $(document).ready(function(){
 				success: function(data){
 					temp = show_text.html() + '<tr><td id = "user_name">' + data.user_name + ':</td><td> ' + data.message + '</td><td>' + data.send_time +'</td><td></td></tr>';
 					show_text.html(temp);
+					$('.scroll-pane').scrollTo(50000,200);
 				}
 			})
 			$('#send_text').val('');
@@ -35,15 +36,12 @@ $(document).ready(function(){
 				'room_id': room_id
 			},
 			success: function(data){
-				/*
-				$.each(data.new_mass, function(){
-					$('#temp_message').html('' + $(this));
-				})*/
 				message_count = data.messge_count;
 				for (var i = data.mass.length - 1; i >= 0; i--) {
 					split_text = data.mass[i].split('###');
 					temp = show_text.html() + '<tr><td id = "user_name">' + split_text[0] + ':</td><td> ' + split_text[1] + '</td><td>' + split_text[2] + '</td><td></td></tr>';
 					show_text.html(temp);
+					$('.scroll-pane').scrollTo(50000,1);
 				};
 			}
 		})
