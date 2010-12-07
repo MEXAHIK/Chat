@@ -3,7 +3,7 @@
 {% block title %}Комната чата
 
 {% endblock %}
-{% block header %}Комната{% endblock %}
+{% block header %}Комната :: {{ room_name.name }}{% endblock %}
 
 {% block content %}
 <style type="text/css">
@@ -29,5 +29,8 @@
 	<input type="button" value="Отправить" id="send_button"></p>
 	<hr>
 	<div id = "temp_message"></div>
-    <script type = "text/javascript" src="{{MEDIA_URL}}js/jscript.js"></script>
+	<script>
+		var room_id = {{ room_name.id }};
+	</script>
+	<script type = "text/javascript" src="{{MEDIA_URL}}js/jscript.js"></script>
 {% endblock %}

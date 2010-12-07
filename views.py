@@ -69,17 +69,18 @@ def autch(request):
 
 @permission_required('Chatdb.add_chatroom', '/autch/')
 def chat_room_details(request, id):
-	return render_to_response('chat_room_details.html', context_instance = RequestContext(request))
+	room_name = get_object_or_404(ChatRoom, id = id)
+	return render_to_response('chat_room_details.html', {'room_name': room_name}, context_instance = RequestContext(request))
 
 all_message = []
 
 def send_message(request):
 	message = request.GET.get('message')
 	user_name = request.GET.get('user_name')
+	room_id = request.GET.get('room_id')
 	temp_time = time.gmtime(time.time())
 	send_time = "%s:%s:%s" % (temp_time.tm_hour + 2, temp_time.tm_min, temp_time.tm_sec)
-	all_message.append("%s,%s,%s" % (user_name, message, send_time))
-	print (all_message)
+	all_message.append("%s###%s###%s###%s" % (user_name, message, send_time, room_id))
 	response = {'success': True, 'message': message, 'user_name': user_name, 'send_time': send_time}
 	json=simplejson.dumps(response);
 	return HttpResponse(json, mimetype='application/json')
@@ -87,20 +88,25 @@ def send_message(request):
 
 def update_message(request):
 	message_count = request.POST.get('message_count')
-	user_name = request.user
-	len_mass = len(all_message)
+	user_name = request.POST.get('user_name')
+	room_id = request.POST.get('room_id')
 	difference = 0
 	new_mass = []
 	mass = []
-	print (len_mass, message_count)
+	room_message = []
+	for i in all_message:
+		j = i.split('###')
+		if j[3] == room_id:
+			room_message.append("%s###%s###%s###%s" % (j[0], j[1], j[2], j[3]))
+	len_mass = len(room_message)
 	if len_mass != int(message_count):
 		difference =  len_mass - int(message_count)
-		print (difference)
-		for i in all_message:
-			j = i.split(",")
-			print (j[0])
-			if j[0] != user_name:
-				new_mass.insert(0, "%s,%s,%s" % (j[0], j[1], j[2]))
+		for i in room_message:
+			j = i.split("###")
+			if j[0] != user_name and int(message_count) != 0:
+				new_mass.insert(0, "%s###%s###%s" % (j[0], j[1], j[2]))
+			elif int(message_count) == 0:
+				new_mass.insert(0, "%s###%s###%s" % (j[0], j[1], j[2]))
 		k = 0
 		while(difference > k):
 			mass.append(new_mass[k])
