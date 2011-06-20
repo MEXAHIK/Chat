@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404, get_list_or_
 from django.template import RequestContext
 from django.contrib import auth
 from django.http import HttpResponse, HttpResponseRedirect
-from Chat.forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm
 from django.contrib.auth.models import User
 from Chatdb.models import ChatRoomForm, ChatRoom
 from django.contrib.auth.decorators import permission_required
@@ -87,9 +87,9 @@ def send_message(request):
 
 
 def update_message(request):
-	message_count = request.POST.get('message_count')
-	user_name = request.POST.get('user_name')
-	room_id = request.POST.get('room_id')
+	message_count = request.GET.get('message_count')
+	user_name = request.GET.get('user_name')
+	room_id = request.GET.get('room_id')
 	difference = 0
 	new_mass = []
 	mass = []

@@ -28,7 +28,7 @@ $(document).ready(function(){
 	function wait_message(){
 		var split_text;
 		$.ajax({
-			type: 'POST',
+			type: 'GET',
 			url: '/update-message/',
 			data: {
 				'message_count': message_count,
